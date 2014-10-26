@@ -5,7 +5,6 @@ import "io"
 import "net"
 import "log"
 
-
 const listenAddr = "localhost:4000"
 
 func main() {
@@ -47,7 +46,7 @@ func chat(a, b io.ReadWriteCloser) {
 	b.Close()
 }
 
-func cp (w io.Writer, r io.Reader, errc chan<- error) {
+func cp(w io.Writer, r io.Reader, errc chan<- error) {
 	_, err := io.Copy(w, r)
 	errc <- err
 }

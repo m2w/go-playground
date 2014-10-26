@@ -55,7 +55,7 @@ var em = document.createElement("em");
 
 em.appendChild(document.createTextNode("Your chat partner has disconnected"));
 addMsg(em);
-
+document.getElementById('msg').blur();
 document.getElementById('msg').setAttribute('disabled');
 document.getElementById('submit').setAttribute('disabled');
 };
@@ -139,7 +139,7 @@ func match(c io.ReadWriteCloser) {
 		// chat handled by other goroutine
 	case p := <-partner:
 		chat(p, c)
-	case <-time.After(5* time.Second):
+	case <-time.After(5 * time.Second):
 		chat(Bot(), c)
 	}
 }
@@ -184,7 +184,6 @@ func (b bot) speak() {
 	msg := chain.Generate(10)
 	b.out.Write([]byte(msg))
 }
-
 
 // The Markov chain code is largely copied from golang.com/doc/codewalk/markov/
 // Copyright 2011 The Go Authors.  All rights reserved.
@@ -273,7 +272,6 @@ func (c *Chain) Write(b []byte) (int, error) {
 	}
 	return len(b), nil
 }
-
 
 // Generate returns a string of at most n words generated from Chain.
 func (c *Chain) Generate(n int) string {
